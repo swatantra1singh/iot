@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../domain/entities/iot_device.dart';
 import '../providers/iot_device_providers.dart';
@@ -46,13 +47,19 @@ class DevicesScreen extends HookConsumerWidget {
             onPressed: deviceState.isScanning ? null : deviceNotifier.scanDevices,
             tooltip: 'Scan for devices',
           ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => context.push('/settings'),
+            tooltip: 'Settings',
+          ),
         ],
       ),
       body: _buildBody(context, deviceState, deviceNotifier),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddDeviceDialog(context),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => context.push('/add-device'),
         tooltip: 'Add device',
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Add Device'),
       ),
     );
   }

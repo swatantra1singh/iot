@@ -6,19 +6,22 @@ import 'core/router/app_router.dart';
 import 'features/iot/data/datasources/iot_local_data_source.dart';
 import 'features/iot/data/datasources/iot_remote_data_source.dart';
 import 'features/iot/presentation/providers/iot_device_providers.dart';
+import 'features/settings/presentation/providers/theme_provider.dart';
 
 /// Main IoT Application widget.
-class IotApp extends StatelessWidget {
+class IotApp extends ConsumerWidget {
   const IotApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeNotifierProvider);
+
     return MaterialApp.router(
       title: 'IoT App',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       routerConfig: appRouter,
     );
   }
