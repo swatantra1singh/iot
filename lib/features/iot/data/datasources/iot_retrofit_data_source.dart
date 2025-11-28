@@ -95,8 +95,8 @@ class IotRetrofitDataSource implements IotRemoteDataSource {
         'command': command,
         if (parameters != null) 'parameters': parameters,
       };
-      final result = await _apiService.sendCommand(deviceId, commandData);
-      return result['success'] == true;
+      final response = await _apiService.sendCommand(deviceId, commandData);
+      return response.success;
     } on DioException catch (e) {
       throw _mapDioException(e);
     }
@@ -123,9 +123,15 @@ class IotRetrofitDataSource implements IotRemoteDataSource {
 
   @override
   Stream<SensorDataModel> streamSensorData(String deviceId) {
-    // Placeholder for WebSocket implementation
-    // In a real implementation, this would connect to a WebSocket
-    // and stream sensor data in real-time.
+    // TODO(streaming): Implement WebSocket-based real-time sensor data streaming.
+    // Requirements:
+    // - Connect to WebSocket endpoint at ApiConstants.wsUrl
+    // - Subscribe to device-specific sensor channel
+    // - Handle reconnection on connection loss
+    // - Parse incoming JSON messages to SensorDataModel
+    //
+    // For production, replace this mock implementation with actual WebSocket logic.
+    // This placeholder returns mock data for development/testing purposes only.
     return Stream.periodic(const Duration(seconds: 2), (i) {
       return SensorDataModel(
         id: 'stream-$deviceId-$i',

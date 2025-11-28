@@ -1,14 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import '../../features/iot/data/models/command_response_model.dart';
 import '../../features/iot/data/models/iot_device_model.dart';
 import '../../features/iot/data/models/sensor_data_model.dart';
 
+// Generated file - run 'dart run build_runner build --delete-conflicting-outputs'
+// to generate this file after modifying the API service interface.
 part 'iot_api_service.g.dart';
 
 /// Retrofit API service for IoT device operations.
 ///
 /// This service defines all REST API endpoints for managing IoT devices.
 /// Generated code handles the actual HTTP requests using Dio.
+///
+/// **Note**: After modifying this file, run code generation:
+/// ```bash
+/// dart run build_runner build --delete-conflicting-outputs
+/// ```
 @RestApi()
 abstract class IotApiService {
   /// Factory constructor that creates an [IotApiService] instance.
@@ -47,7 +55,7 @@ abstract class IotApiService {
 
   /// Sends a command to a device.
   @POST('/devices/{id}/command')
-  Future<Map<String, dynamic>> sendCommand(
+  Future<CommandResponseModel> sendCommand(
     @Path('id') String deviceId,
     @Body() Map<String, dynamic> command,
   );

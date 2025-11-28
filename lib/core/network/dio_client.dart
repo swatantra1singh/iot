@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:dio/dio.dart';
 import '../constants/app_constants.dart';
 
@@ -43,6 +45,9 @@ class DioClient {
   }
 
   /// Creates a logging interceptor for debugging.
+  ///
+  /// Uses [developer.log] for better log management in debug mode.
+  /// Logs are only printed when running in debug mode (asserts are enabled).
   static Interceptor _createLoggingInterceptor() {
     return LogInterceptor(
       request: true,
@@ -52,10 +57,12 @@ class DioClient {
       responseBody: true,
       error: true,
       logPrint: (object) {
-        // Only log in debug mode
+        // Only log in debug mode using developer.log for better filtering
         assert(() {
-          // ignore: avoid_print
-          print(object);
+          developer.log(
+            object.toString(),
+            name: 'DioClient',
+          );
           return true;
         }());
       },
@@ -63,11 +70,19 @@ class DioClient {
   }
 
   /// Creates an error handling interceptor.
+  ///
+  /// This interceptor provides a centralized place for:
+  /// - Logging errors to monitoring services (e.g., Crashlytics, Sentry)
+  /// - Implementing global retry logic
+  /// - Handling token refresh on 401 errors
+  ///
+  /// Currently passes errors through unchanged as error mapping is handled
+  /// in the data source layer. Extend this for cross-cutting error handling needs.
   static Interceptor _createErrorInterceptor() {
     return InterceptorsWrapper(
       onError: (error, handler) {
-        // Transform DioException to more specific error types if needed
-        // For now, just pass through
+        // TODO(monitoring): Add error logging to monitoring service here
+        // Example: FirebaseCrashlytics.instance.recordError(error, ...);
         handler.next(error);
       },
     );
