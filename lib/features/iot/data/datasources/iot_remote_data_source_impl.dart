@@ -34,7 +34,8 @@ class IotRemoteDataSourceImpl implements IotRemoteDataSource {
       name: 'Kitchen Light',
       type: 'light',
       status: 'offline',
-      lastUpdated: DateTime.now().subtract(const Duration(hours: 2)).toIso8601String(),
+      lastUpdated:
+          DateTime.now().subtract(const Duration(hours: 2)).toIso8601String(),
       metadata: {'brightness': 0, 'color': '#FFFFFF'},
     ),
   ];

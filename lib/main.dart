@@ -12,7 +12,8 @@ Future<void> main() async {
   final sharedPreferences = await SharedPreferences.getInstance();
 
   runApp(AppProviders(
-    localDataSource: IotLocalDataSourceImpl(sharedPreferences: sharedPreferences),
+    localDataSource:
+        IotLocalDataSourceImpl(sharedPreferences: sharedPreferences),
     remoteDataSource: IotRemoteDataSourceImpl(),
   ));
 }
