@@ -18,6 +18,7 @@ dependencies:
   dartz: ^0.10.1
   equatable: ^2.0.5
   dio: ^5.4.3+1
+  retrofit: ^4.4.1
   connectivity_plus: ^6.0.3
   flutter_blue_plus: ^1.32.12
   mqtt_client: ^10.3.0
@@ -33,6 +34,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.3
   freezed: ^2.5.7
   json_serializable: ^6.8.0
+  retrofit_generator: ^9.1.5
   mockito: ^5.4.4
   build_verify: ^3.1.0
 
