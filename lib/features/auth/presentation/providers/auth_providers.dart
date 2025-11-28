@@ -165,6 +165,17 @@ class AuthNotifier extends _$AuthNotifier {
     );
   }
 
+  /// Resends the confirmation code.
+  Future<bool> resendConfirmationCode({required String email}) async {
+    final repository = ref.read(authRepositoryProvider);
+    final result = await repository.resendConfirmationCode(email: email);
+
+    return result.fold(
+      (failure) => false,
+      (success) => success,
+    );
+  }
+
   /// Signs out the current user.
   Future<void> signOut() async {
     state = const AuthLoading();

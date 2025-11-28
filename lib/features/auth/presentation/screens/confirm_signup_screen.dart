@@ -153,13 +153,22 @@ class ConfirmSignUpScreen extends HookConsumerWidget {
                         style: AppTextStyles.bodyMedium,
                       ),
                       TextButton(
-                        onPressed: () {
-                          // TODO: Implement resend code
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('New verification code sent!'),
-                            ),
-                          );
+                        onPressed: () async {
+                          final success = await authNotifier.resendConfirmationCode(email: email);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  success
+                                      ? 'New verification code sent!'
+                                      : 'Failed to resend code. Please try again.',
+                                ),
+                                backgroundColor: success
+                                    ? AppColors.success
+                                    : AppColors.error,
+                              ),
+                            );
+                          }
                         },
                         child: const Text('Resend'),
                       ),
