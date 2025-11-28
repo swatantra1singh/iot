@@ -3,6 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/router/app_router.dart';
+import 'features/iot/data/datasources/iot_local_data_source.dart';
+import 'features/iot/data/datasources/iot_remote_data_source.dart';
+import 'features/iot/presentation/providers/iot_device_providers.dart';
 
 /// Main IoT Application widget.
 class IotApp extends StatelessWidget {
@@ -23,12 +26,23 @@ class IotApp extends StatelessWidget {
 
 /// Entry point wrapper that sets up providers.
 class AppProviders extends StatelessWidget {
-  const AppProviders({super.key});
+  final IotLocalDataSource localDataSource;
+  final IotRemoteDataSource remoteDataSource;
+
+  const AppProviders({
+    super.key,
+    required this.localDataSource,
+    required this.remoteDataSource,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const ProviderScope(
-      child: IotApp(),
+    return ProviderScope(
+      overrides: [
+        iotLocalDataSourceProvider.overrideWithValue(localDataSource),
+        iotRemoteDataSourceProvider.overrideWithValue(remoteDataSource),
+      ],
+      child: const IotApp(),
     );
   }
 }

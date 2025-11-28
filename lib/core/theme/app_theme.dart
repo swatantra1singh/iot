@@ -126,7 +126,7 @@ class AppTheme {
           foregroundColor: AppColors.textOnPrimary,
           elevation: 0,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: AppColors.cardBackground,
           elevation: 2,
           shape: RoundedRectangleBorder(
@@ -178,7 +178,7 @@ class AppTheme {
           foregroundColor: AppColors.textOnPrimary,
           elevation: 0,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: AppColors.darkCardBackground,
           elevation: 2,
           shape: RoundedRectangleBorder(
@@ -200,11 +200,13 @@ class AppTheme {
           fillColor: AppColors.darkSurface,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: AppColors.border.withValues(alpha: 0.3)),
+            borderSide:
+                BorderSide(color: AppColors.border.withValues(alpha: 0.3)),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: AppColors.border.withValues(alpha: 0.3)),
+            borderSide:
+                BorderSide(color: AppColors.border.withValues(alpha: 0.3)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8),
