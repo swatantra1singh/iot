@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../features/iot/presentation/screens/devices_screen.dart';
+import '../../features/iot/presentation/screens/devices_screen.dart';
 
 /// Application router configuration.
 final GoRouter appRouter = GoRouter(
